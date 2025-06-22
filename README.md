@@ -19,7 +19,7 @@ sudo ./install.sh
 
 ## Ansible (более практичная альтернатива)
 ```bash
-ansible-playbook -i inventory ansible-playbook.yml
+ansible-playbook -i inventory ansible-playbook.yml -K
 ```
 
 ## Удаление
