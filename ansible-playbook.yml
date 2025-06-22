@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  vars:
+    PROCESS_NAME: test
+    API_URL: https://test.com/monitoring/test/api
+    env_file: /etc/monitor_test.env
+
+  pre_tasks:
+    - name: Ensure required directories exist
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - /usr/local/bin
+        - /var/log
+        - /var/run
+
+  roles:
+    - role: systemd

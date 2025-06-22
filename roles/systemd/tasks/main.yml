@@ -1,0 +1,34 @@
+---
+- name: Create environment file
+  template:
+    src: monitor_test.env.j2
+    dest: /etc/monitor_test.env
+    mode: '0644'
+
+- name: Copy monitoring script
+  copy:
+    src: ../../monitor_test.sh
+    dest: /usr/local/bin/monitor_test.sh
+    mode: '0755'
+
+- name: Install systemd service
+  template:
+    src: monitor_test.service.j2
+    dest: /etc/systemd/system/monitor_test.service
+    mode: '0644'
+
+- name: Install systemd timer
+  template:
+    src: monitor_test.timer.j2
+    dest: /etc/systemd/system/monitor_test.timer
+    mode: '0644'
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: Enable and start timer
+  systemd:
+    name: monitor_test.timer
+    enabled: yes
+    state: started

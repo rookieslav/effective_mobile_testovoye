@@ -1,0 +1,7 @@
+[Unit]
+Description=Monitor test process
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/monitor_test.env
+ExecStart=/usr/local/bin/monitor_test.sh
